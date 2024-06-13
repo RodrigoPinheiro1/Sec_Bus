@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.van</groupId>
-	<artifactId>crud_Responsavel</artifactId>
+	<artifactId>crud</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>crud_Responsavel</name>
 	<description>crud_Responsavel</description>
