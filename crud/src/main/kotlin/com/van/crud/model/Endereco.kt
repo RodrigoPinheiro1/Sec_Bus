@@ -6,29 +6,28 @@ import jakarta.validation.constraints.NotNull
 
 @Embeddable
 data class Endereco(
-    var cep: String? = null,
 
-    @field:NotNull
     @field:NotBlank
+    @field:NotNull
+    var cep: String,
+    @field:NotBlank
+    @field:NotNull
     var cidade: String,
 
-    @field:NotNull
     @field:NotBlank
+    @field:NotNull
     var numero: String,
 
-    @field:NotNull
     @field:NotBlank
+    @field:NotNull
     var logradouro: String,
 
-    @field:NotNull
-    @field:NotBlank
+
     var complemento: String,
 
-    @field:NotNull
-    @field:NotBlank
+
     var bairro: String,
 
-    @field:NotNull
-    @field:NotBlank
+
     var localidade: String
 )
