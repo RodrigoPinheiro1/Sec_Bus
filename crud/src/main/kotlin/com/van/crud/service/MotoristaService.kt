@@ -3,7 +3,6 @@ package com.van.crud.service
 import com.van.crud.dto.MotoristaDTO
 import com.van.crud.dto.RequestMotoristaDTO
 import com.van.crud.dto.ResponseMotoristaDTO
-import com.van.crud.model.Motorista
 import com.van.crud.repository.MotoristaRepository
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
@@ -24,11 +23,17 @@ class MotoristaService(val motoristaRepository: MotoristaRepository) {
     fun buscarMotoristas(pagable: Pageable, cidade: String): Page<MotoristaDTO> {
 
         return motoristaRepository.findAllByEnderecoCidade(pagable, cidade).map {
-            it.toDTOPage()
+            it.toDTOSingle()
         }
 
 
+    }
 
+    fun buscarMotoristasId(id: Long): MotoristaDTO {
+
+        val motorista = motoristaRepository.findById(id).orElseThrow()
+
+        return motorista.toDTOSingle()
     }
 
 }

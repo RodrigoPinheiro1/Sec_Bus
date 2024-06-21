@@ -47,7 +47,7 @@ data class Motorista(
         )
     }
 
-    fun toDTOPage(): MotoristaDTO {
+    fun toDTOSingle(): MotoristaDTO {
         return MotoristaDTO(
             id = this.id,
             nome = nome,
