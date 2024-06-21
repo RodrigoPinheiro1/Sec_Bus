@@ -1,5 +1,6 @@
 package com.van.crud.model
 
+import com.van.crud.dto.AlunoDTO
 import jakarta.persistence.Entity
 import jakarta.persistence.GeneratedValue
 import jakarta.persistence.GenerationType
@@ -19,9 +20,16 @@ data class Aluno(
     var telefone: String?,
 
     @ManyToOne
-    private var responsavel: Responsavel
+     var responsavel: Responsavel?
+ ){
+    fun toDto(): AlunoDTO {
+        return AlunoDTO(
+            id = this.id,
+            nome = this.nome,
+            dataNascimento = this.dataNascimento,
+            telefone = this.telefone
+        )
+    }
 
 
-
-
- )
+}

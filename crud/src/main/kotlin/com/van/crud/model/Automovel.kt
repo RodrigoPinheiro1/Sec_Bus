@@ -1,5 +1,6 @@
 package com.van.crud.model
 
+import com.van.crud.dto.AutomovelDTO
 import jakarta.persistence.Entity
 import jakarta.persistence.GeneratedValue
 import jakarta.persistence.GenerationType
@@ -16,4 +17,10 @@ data class Automovel(
     var nomeCarro: String,
 
     var placa: String
-)
+) {
+
+    fun toDTO(): AutomovelDTO {
+
+        return AutomovelDTO(id, modelo, nomeCarro, placa)
+    }
+}

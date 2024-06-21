@@ -1,5 +1,6 @@
 package com.van.crud.model
 
+import com.van.crud.dto.ResponseMotoristaDTO
 import jakarta.persistence.*
 import java.util.*
 
@@ -29,5 +30,21 @@ data class Motorista(
     var endereco: Endereco,
 
     @OneToMany(mappedBy = "motorista", cascade = [CascadeType.ALL])
-    var responsavel: List<Responsavel> = mutableListOf()
-)
+    var responsavel: List<Responsavel?> = mutableListOf()
+) {
+    fun toDto(): ResponseMotoristaDTO {
+
+        return ResponseMotoristaDTO(
+            id = this.id,
+            nome = nome,
+            cpf = cpf,
+            telefone = telefone,
+            dataDeNascimento = dataDeNascimento,
+            cnh = cnh,
+            endereco = endereco,
+            automovel = automovel.toDTO()
+        )
+    }
+
+
+}
