@@ -14,6 +14,7 @@ data class ResponseMotoristaDTO(
     var cnh: String,
 
     var telefone: String,
+    var codigoSeguranca: String?,
 
     var dataDeNascimento: Date,
     var automovel: AutomovelDTO,

@@ -1,6 +1,7 @@
 package com.van.crud.controller
 
 import com.van.crud.dto.AlunoDTO
+import com.van.crud.dto.CodigoDTO
 import com.van.crud.dto.RequestResponsavelDTO
 import com.van.crud.dto.ResponseResponsavelDTO
 import com.van.crud.service.ResponsavelService
@@ -13,7 +14,10 @@ import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping("/responsaveis")
-class ResponsavelController(private val service: ResponsavelService) {
+class ResponsavelController(
+    private val service: ResponsavelService,
+    private val responsavelService: ResponsavelService
+) {
 
 
     @PostMapping
@@ -34,6 +38,14 @@ class ResponsavelController(private val service: ResponsavelService) {
 
         return ResponseEntity(cadastrarAluno, HttpStatus.CREATED)
 
+    }
+
+    @PutMapping("/pedidos/{id}")
+    fun confirmarCorrida(@PathVariable @NotNull id: Long, @RequestBody codigoDTO: CodigoDTO): ResponseEntity<String> {
+
+        responsavelService.confirmarCorrida(id, codigoDTO)
+
+        return ResponseEntity.ok("confirmacao feito com sucesso")
     }
 
 

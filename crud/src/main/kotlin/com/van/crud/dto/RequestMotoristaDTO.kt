@@ -39,6 +39,7 @@ data class RequestMotoristaDTO(
             dataDeNascimento = dataDeNascimento,
             cnh = cnh ?: "",
             endereco = endereco,
+            codigoSeguranca = null,
             automovel = automovel.toEntity()
         )
     }

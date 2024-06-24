@@ -9,7 +9,7 @@ data class Responsavel(
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Long? = null,
+    var id: Long? = null,
     var nome: String,
     var email: String,
     var telefone: String,
