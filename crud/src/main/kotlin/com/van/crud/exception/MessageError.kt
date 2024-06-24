@@ -6,6 +6,6 @@ data class MessageError(
     val timestamp: LocalDateTime,
     val status: Int,
     val error: String,
-    val errors: List<ErrorValidation>
+    val errors: List<ErrorValidation?>
 ) {
 }

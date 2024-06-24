@@ -7,6 +7,8 @@ import com.van.crud.repository.MotoristaRepository
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
 import org.springframework.stereotype.Service
+import java.security.SecureRandom
+import java.util.*
 
 @Service
 class MotoristaService(val motoristaRepository: MotoristaRepository) {
@@ -14,6 +16,8 @@ class MotoristaService(val motoristaRepository: MotoristaRepository) {
 
 
         val motorista = requestMotoristaDTO.toEntity()
+
+        motorista.codigoSeguranca = generateSecurityCode()
 
         motoristaRepository.save(motorista)
 
@@ -35,5 +39,18 @@ class MotoristaService(val motoristaRepository: MotoristaRepository) {
 
         return motorista.toDTOSingle()
     }
+
+
+    fun generateSecurityCode(length: Int = 8): String {
+        val chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+        val secureRandom = SecureRandom()
+        val sb = StringBuilder(length)
+        for (i in 0 until length) {
+            val randomIndex = secureRandom.nextInt(chars.length)
+            sb.append(chars[randomIndex])
+        }
+        return sb.toString()
+    }
+
 
 }

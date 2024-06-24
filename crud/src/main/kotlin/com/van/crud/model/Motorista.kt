@@ -15,6 +15,8 @@ data class Motorista(
 
     var cpf: String,
 
+    var codigoSeguranca: String?,
+
     var cnh: String,
 
     var telefone: String,
@@ -43,6 +45,7 @@ data class Motorista(
             dataDeNascimento = dataDeNascimento,
             cnh = cnh,
             endereco = endereco,
+            codigoSeguranca = codigoSeguranca ?: "" ,
             automovel = automovel.toDTO()
         )
     }

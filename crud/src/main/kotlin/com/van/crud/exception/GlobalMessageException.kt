@@ -37,12 +37,16 @@ class GlobalMessageException {
         return ResponseEntity.badRequest().body(messageError)
     }
 
-//    @ResponseStatus(HttpStatus.BAD_REQUEST)
-//    @ExceptionHandler(HttpMessageNotReadableException::class)
-//    fun mensagemNaolida(exception: HttpMessageNotReadableException): String? {
-//
-//
-//        return exception.cause
-//
-//    }
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    @ExceptionHandler(ResponsavelNotFoundException::class)
+    fun mensagemNaolida(): MessageError {
+
+        return MessageError(
+            timestamp = now(),
+            status = HttpStatus.NOT_FOUND.value(),
+            error = "Responsavel não existe",
+            errors = listOf()
+        )
+
+    }
 }
