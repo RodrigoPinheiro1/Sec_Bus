@@ -18,6 +18,7 @@ data class Aluno(
     var nome: String,
     var dataNascimento: LocalDate,
     var telefone: String?,
+    var embarcado: Boolean = false,
 
     @ManyToOne
      var responsavel: Responsavel?
@@ -27,7 +28,8 @@ data class Aluno(
             id = this.id,
             nome = this.nome,
             dataNascimento = this.dataNascimento,
-            telefone = this.telefone
+            telefone = this.telefone,
+            embarcado = this.embarcado
         )
     }
 

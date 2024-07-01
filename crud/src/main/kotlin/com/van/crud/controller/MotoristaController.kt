@@ -1,5 +1,6 @@
 package com.van.crud.controller
 
+import com.van.crud.dto.EmbarqueDTO
 import com.van.crud.dto.MotoristaDTO
 import com.van.crud.dto.RequestMotoristaDTO
 import com.van.crud.dto.ResponseMotoristaDTO
@@ -45,4 +46,25 @@ class MotoristaController(val motoristaService: MotoristaService) {
         return motoristaService.buscarMotoristasId(id)
 
     }
+
+//    @PostMapping("/embarques/{id}")
+//    fun embarque(@PathVariable id: Long, @RequestBody embarqueDto: EmbarqueDTO) : ResponseEntity<String> {
+//
+//
+//
+//        return
+//    }
+
+
+    @GetMapping("/embarques/{id}")
+    fun checkListAlunos(@PathVariable id: Long): ResponseEntity<EmbarqueDTO> {
+
+
+        val checkListAlunos = motoristaService.checkListAlunos(id)
+
+
+        return ResponseEntity(checkListAlunos, HttpStatus.OK)
+    }
+
+
 }

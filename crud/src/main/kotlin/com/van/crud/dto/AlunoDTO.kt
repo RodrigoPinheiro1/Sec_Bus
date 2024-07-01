@@ -5,13 +5,14 @@ import java.time.LocalDate
 
 data class AlunoDTO(
 
-    val id: Long? = null,
+    var id: Long? = null,
     var nome: String,
     var dataNascimento: LocalDate,
     var telefone: String?,
+    var embarcado: Boolean
 
 
-    ) {
+) {
     fun toEntity(): Aluno {
 
 
@@ -19,6 +20,7 @@ data class AlunoDTO(
             nome = this.nome,
             dataNascimento = dataNascimento,
             telefone = this.telefone,
+            embarcado = this.embarcado,
             responsavel = null
         )
 

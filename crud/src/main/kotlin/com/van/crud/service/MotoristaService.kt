@@ -1,17 +1,21 @@
 package com.van.crud.service
 
-import com.van.crud.dto.MotoristaDTO
-import com.van.crud.dto.RequestMotoristaDTO
-import com.van.crud.dto.ResponseMotoristaDTO
+import com.van.crud.dto.*
+import com.van.crud.model.Aluno
+import com.van.crud.repository.AlunoRepository
 import com.van.crud.repository.MotoristaRepository
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
 import org.springframework.stereotype.Service
 import java.security.SecureRandom
 import java.util.*
+import java.util.stream.Collectors
 
 @Service
-class MotoristaService(val motoristaRepository: MotoristaRepository) {
+class MotoristaService(
+    val motoristaRepository: MotoristaRepository,
+    val alunoRepository: AlunoRepository
+) {
     fun cadastrarMotorista(requestMotoristaDTO: RequestMotoristaDTO): ResponseMotoristaDTO {
 
 
@@ -50,6 +54,14 @@ class MotoristaService(val motoristaRepository: MotoristaRepository) {
             sb.append(chars[randomIndex])
         }
         return sb.toString()
+    }
+
+    fun checkListAlunos(id: Long): EmbarqueDTO {
+
+        val alunoDTOS = alunoRepository.findMotoristaComAlunos(id)
+            .map { aluno -> aluno.toDto() }
+
+        return EmbarqueDTO(alunoDTOS)
     }
 
 
