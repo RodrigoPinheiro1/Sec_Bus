@@ -1,5 +1,6 @@
 package com.van.crud.model
 
+import com.van.crud.dto.MotoristaDTO
 import com.van.crud.dto.ResponseResponsavelDTO
 import jakarta.persistence.*
 import java.time.LocalDate
@@ -37,7 +38,12 @@ data class Responsavel(
             cpf = this.cpf,
             dataNascimento = this.dataNascimento,
             endereco = this.endereco,
-            motorista = this.motorista,
+            motorista = MotoristaDTO(
+                motorista?.id,
+                motorista?.nome ?: "",
+                motorista?.telefone ?: "",
+                motorista?.endereco ?: Endereco("", "", "", "", "", "", "")
+            ),
             aluno = aluno.map { it?.toDto() }
         )
     }

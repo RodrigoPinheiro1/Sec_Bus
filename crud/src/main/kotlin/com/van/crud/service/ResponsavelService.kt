@@ -43,7 +43,7 @@ class ResponsavelService(
 
     }
 
-    fun confirmarCorrida(id: Long, codigoDTO: CodigoDTO) {
+    fun confirmarCorrida(id: Long, codigoDTO: CodigoDTO): ResponseResponsavelDTO {
 
         val responsavel = responsavelRepository.findById(id).orElseThrow {
             ResponsavelNotFoundException("Responsavel not found!")
@@ -52,10 +52,11 @@ class ResponsavelService(
         val motorista = motoristaRepository.findByCodigoSeguranca(codigoDTO.codigo).orElseThrow {
             MotoristaNotFoundException("motorista nao existe")
         }
-        responsavel.id = id
         responsavel.motorista = motorista
-
         responsavelRepository.save(responsavel)
+
+
+        return responsavel.toModelResponse()
     }
 
 

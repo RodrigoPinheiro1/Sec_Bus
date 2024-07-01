@@ -1,7 +1,6 @@
 package com.van.crud.dto
 
 import com.van.crud.model.Endereco
-import com.van.crud.model.Motorista
 import java.time.LocalDate
 
 
@@ -14,7 +13,7 @@ data class ResponseResponsavelDTO(
     var dataNascimento: LocalDate,
     var aluno: List<AlunoDTO?> = mutableListOf(),
     var endereco: Endereco,
-    var motorista: Motorista?
+    var motorista: MotoristaDTO
 ) {
 
     fun toModel(): ResponseResponsavelDTO {

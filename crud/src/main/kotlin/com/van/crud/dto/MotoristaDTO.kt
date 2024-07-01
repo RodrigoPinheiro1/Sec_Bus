@@ -14,4 +14,6 @@ data class MotoristaDTO(
 ) {
 
 
+
+
 }

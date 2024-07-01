@@ -41,11 +41,11 @@ class ResponsavelController(
     }
 
     @PutMapping("/pedidos/{id}")
-    fun confirmarCorrida(@PathVariable @NotNull id: Long, @RequestBody codigoDTO: CodigoDTO): ResponseEntity<String> {
+    fun confirmarCorrida(@PathVariable @NotNull id: Long, @RequestBody codigoDTO: CodigoDTO): ResponseEntity<ResponseResponsavelDTO> {
 
-        responsavelService.confirmarCorrida(id, codigoDTO)
+        val responseDto = responsavelService.confirmarCorrida(id, codigoDTO)
 
-        return ResponseEntity.ok("confirmacao feito com sucesso")
+        return ResponseEntity.ok(responseDto)
     }
 
 
