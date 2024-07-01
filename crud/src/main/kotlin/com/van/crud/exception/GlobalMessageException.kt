@@ -39,12 +39,25 @@ class GlobalMessageException {
 
     @ResponseStatus(HttpStatus.NOT_FOUND)
     @ExceptionHandler(ResponsavelNotFoundException::class)
-    fun mensagemNaolida(): MessageError {
+    fun responsavelNaoExiste(): MessageError {
 
         return MessageError(
             timestamp = now(),
             status = HttpStatus.NOT_FOUND.value(),
             error = "Responsavel não existe",
+            errors = listOf()
+        )
+
+    }
+
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    @ExceptionHandler(MotoristaNotFoundException::class)
+    fun motoristaNaoExiste(): MessageError {
+
+        return MessageError(
+            timestamp = now(),
+            status = HttpStatus.NOT_FOUND.value(),
+            error = "Motorista não existe",
             errors = listOf()
         )
 
