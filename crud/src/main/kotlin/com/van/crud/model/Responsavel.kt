@@ -17,7 +17,7 @@ data class Responsavel(
     var cpf: String,
     var dataNascimento: LocalDate,
     @OneToMany(mappedBy = "responsavel", cascade = [CascadeType.ALL])
-    var aluno: List<Aluno?> = mutableListOf(),
+    var aluno: MutableList<Aluno?> = mutableListOf(),
 
     @Embedded
     var endereco: Endereco,

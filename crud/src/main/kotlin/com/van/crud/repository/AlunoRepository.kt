@@ -11,6 +11,6 @@ interface AlunoRepository : JpaRepository<Aluno, Long> {
 
 
     @Query("select a from Aluno a where a.responsavel.motorista.id = :motoristaId")
-    fun findMotoristaComAlunos(motoristaId: Long): List<Aluno>
+    fun findMotoristaComAlunos(motoristaId: Long): MutableList<Aluno>
 
 }

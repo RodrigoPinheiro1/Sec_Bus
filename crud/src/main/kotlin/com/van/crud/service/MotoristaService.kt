@@ -1,15 +1,12 @@
 package com.van.crud.service
 
 import com.van.crud.dto.*
-import com.van.crud.model.Aluno
 import com.van.crud.repository.AlunoRepository
 import com.van.crud.repository.MotoristaRepository
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
 import org.springframework.stereotype.Service
 import java.security.SecureRandom
-import java.util.*
-import java.util.stream.Collectors
 
 @Service
 class MotoristaService(
@@ -62,6 +59,24 @@ class MotoristaService(
             .map { aluno -> aluno.toDto() }
 
         return EmbarqueDTO(alunoDTOS)
+    }
+
+    fun atualizarEmbarque(id: Long, embarqueDto: EmbarqueDTO): EmbarqueDTO {
+
+
+        val alunos = alunoRepository.findMotoristaComAlunos(id)
+
+        alunos.forEach {
+            embarqueDto.alunos.forEach { alunoDTO ->
+                it.embarcado = alunoDTO!!.embarcado
+            }
+        }
+
+        alunoRepository.saveAll(alunos)
+        // implementar notificação mensageria
+
+        return EmbarqueDTO(alunos.map { aluno -> aluno.toDto() })
+
     }
 
 

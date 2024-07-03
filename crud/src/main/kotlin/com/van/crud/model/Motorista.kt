@@ -33,7 +33,7 @@ data class Motorista(
     var endereco: Endereco,
 
     @OneToMany(mappedBy = "motorista", cascade = [CascadeType.ALL])
-    var responsavel: List<Responsavel?> = mutableListOf()
+    var responsavel: MutableList<Responsavel?> = mutableListOf()
 ) {
     fun toResponseDTO(): ResponseMotoristaDTO {
 

@@ -1,9 +1,6 @@
 package com.van.crud.controller
 
-import com.van.crud.dto.EmbarqueDTO
-import com.van.crud.dto.MotoristaDTO
-import com.van.crud.dto.RequestMotoristaDTO
-import com.van.crud.dto.ResponseMotoristaDTO
+import com.van.crud.dto.*
 import com.van.crud.service.MotoristaService
 import jakarta.validation.Valid
 import org.springframework.data.domain.Page
@@ -13,6 +10,7 @@ import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
+import org.springframework.web.bind.annotation.PutMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestParam
@@ -47,13 +45,15 @@ class MotoristaController(val motoristaService: MotoristaService) {
 
     }
 
-//    @PostMapping("/embarques/{id}")
-//    fun embarque(@PathVariable id: Long, @RequestBody embarqueDto: EmbarqueDTO) : ResponseEntity<String> {
-//
-//
-//
-//        return
-//    }
+    @PutMapping("/embarques/{id}")
+    fun atualizarEmbarque(@PathVariable id: Long, @RequestBody embarqueDto: EmbarqueDTO): ResponseEntity<EmbarqueDTO> {
+
+
+        val atualizarEmbarque = motoristaService.atualizarEmbarque(id, embarqueDto)
+
+
+        return ResponseEntity<EmbarqueDTO>(atualizarEmbarque, HttpStatus.OK)
+    }
 
 
     @GetMapping("/embarques/{id}")

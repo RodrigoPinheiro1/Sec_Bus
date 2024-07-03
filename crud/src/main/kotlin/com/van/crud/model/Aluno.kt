@@ -21,8 +21,8 @@ data class Aluno(
     var embarcado: Boolean = false,
 
     @ManyToOne
-     var responsavel: Responsavel?
- ){
+    var responsavel: Responsavel?
+) {
     fun toDto(): AlunoDTO {
         return AlunoDTO(
             id = this.id,
@@ -32,6 +32,7 @@ data class Aluno(
             embarcado = this.embarcado
         )
     }
+
 
 
 }

@@ -9,7 +9,7 @@ data class AlunoDTO(
     var nome: String,
     var dataNascimento: LocalDate,
     var telefone: String?,
-    var embarcado: Boolean
+    var embarcado: Boolean = false
 
 
 ) {
