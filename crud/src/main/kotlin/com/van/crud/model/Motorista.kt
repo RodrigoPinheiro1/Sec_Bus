@@ -3,7 +3,10 @@ package com.van.crud.model
 import com.van.crud.dto.MotoristaDTO
 import com.van.crud.dto.ResponseMotoristaDTO
 import jakarta.persistence.*
+import mu.KotlinLogging
 import java.util.*
+
+private val log = KotlinLogging.logger {}
 
 @Entity
 data class Motorista(
@@ -37,6 +40,9 @@ data class Motorista(
 ) {
     fun toResponseDTO(): ResponseMotoristaDTO {
 
+
+        log.info("Convertendo Entidade para DTO Response")
+
         return ResponseMotoristaDTO(
             id = this.id,
             nome = nome,
@@ -45,12 +51,14 @@ data class Motorista(
             dataDeNascimento = dataDeNascimento,
             cnh = cnh,
             endereco = endereco,
-            codigoSeguranca = codigoSeguranca ?: "" ,
+            codigoSeguranca = codigoSeguranca ?: "",
             automovel = automovel.toDTO()
         )
     }
 
     fun toDTOSingle(): MotoristaDTO {
+
+        log.info("Convertendo Entidade para DTO")
         return MotoristaDTO(
             id = this.id,
             nome = nome,

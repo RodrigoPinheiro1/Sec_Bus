@@ -4,18 +4,21 @@ import com.van.crud.dto.AlunoDTO
 import com.van.crud.dto.CodigoDTO
 import com.van.crud.dto.RequestResponsavelDTO
 import com.van.crud.dto.ResponseResponsavelDTO
-import com.van.crud.exception.MotoristaNotFoundException
-import com.van.crud.exception.ResponsavelNotFoundException
 import com.van.crud.repository.AlunoRepository
 import com.van.crud.repository.MotoristaRepository
 import com.van.crud.repository.ResponsavelRepository
+import mu.KotlinLogging
 import org.springframework.stereotype.Service
+
+private val log = KotlinLogging.logger {}
+
 
 @Service
 class ResponsavelService(
     private val responsavelRepository: ResponsavelRepository,
     private val alunoRepository: AlunoRepository,
-    private val motoristaRepository: MotoristaRepository
+    private val motoristaRepository: MotoristaRepository,
+    val notFoundService: NotFoundService
 ) {
 
 
@@ -24,19 +27,24 @@ class ResponsavelService(
 
         val responsavel = requestResponsavelDTO.toEntity()
 
+
+        log.info("salvando responsavel no banco de dados {} ", responsavel)
         responsavelRepository.save(responsavel)
 
         return responsavel.toModelResponse()
 
     }
 
+
     fun cadastrarAluno(alunoDTO: AlunoDTO, id: Long): ResponseResponsavelDTO {
 
-        val responsavel = responsavelRepository.findById(id).orElseThrow()
+        val responsavel = notFoundService.findByIdResponsavel(id)
 
         val aluno = alunoDTO.toEntity()
 
         aluno.responsavel = responsavel
+
+        log.info { "salvando responsavel aluno {}  $responsavel" }
         alunoRepository.save(aluno)
 
         return responsavel.toModelResponse()
@@ -45,17 +53,15 @@ class ResponsavelService(
 
     fun confirmarCorrida(id: Long, codigoDTO: CodigoDTO): ResponseResponsavelDTO {
 
-        val responsavel = responsavelRepository.findById(id).orElseThrow {
-            ResponsavelNotFoundException("Responsavel not found!")
-        }
 
-        val motorista = motoristaRepository.findByCodigoSeguranca(codigoDTO.codigo).orElseThrow {
-            MotoristaNotFoundException("motorista nao existe")
-        }
+        val responsavel = notFoundService.findByIdResponsavel(id)
+
+        val motorista = notFoundService.findByCodigoMotorista(codigoDTO.codigo)
+
         responsavel.motorista = motorista
         responsavelRepository.save(responsavel)
 
-
+        log.info { "salvo confirmação, informações disponiveis para motorista {}  $responsavel" }
         return responsavel.toModelResponse()
     }
 

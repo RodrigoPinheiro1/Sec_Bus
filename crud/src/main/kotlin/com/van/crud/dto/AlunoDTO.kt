@@ -1,8 +1,9 @@
 package com.van.crud.dto
 
 import com.van.crud.model.Aluno
+import mu.KotlinLogging
 import java.time.LocalDate
-
+private val log = KotlinLogging.logger {}
 data class AlunoDTO(
 
     var id: Long? = null,
@@ -15,6 +16,7 @@ data class AlunoDTO(
 ) {
     fun toEntity(): Aluno {
 
+        log.info("convertendo DTO para Aluno entidade")
 
         return Aluno(
             nome = this.nome,
