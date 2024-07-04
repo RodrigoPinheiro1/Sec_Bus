@@ -5,7 +5,6 @@ import com.van.crud.dto.CodigoDTO
 import com.van.crud.dto.RequestResponsavelDTO
 import com.van.crud.dto.ResponseResponsavelDTO
 import com.van.crud.repository.AlunoRepository
-import com.van.crud.repository.MotoristaRepository
 import com.van.crud.repository.ResponsavelRepository
 import mu.KotlinLogging
 import org.springframework.stereotype.Service
@@ -16,9 +15,8 @@ private val log = KotlinLogging.logger {}
 @Service
 class ResponsavelService(
     private val responsavelRepository: ResponsavelRepository,
-    private val alunoRepository: AlunoRepository,
-    private val motoristaRepository: MotoristaRepository,
-    val notFoundService: NotFoundService
+    val notFoundService: NotFoundService,
+    private val alunoRepository: AlunoRepository
 ) {
 
 
@@ -36,16 +34,18 @@ class ResponsavelService(
     }
 
 
-    fun cadastrarAluno(alunoDTO: AlunoDTO, id: Long): ResponseResponsavelDTO {
+    fun cadastrarAluno(alunoDTO: List<AlunoDTO>, id: Long): ResponseResponsavelDTO {
 
         val responsavel = notFoundService.findByIdResponsavel(id)
 
-        val aluno = alunoDTO.toEntity()
 
-        aluno.responsavel = responsavel
+        val alunos = alunoDTO.map { it.toEntity(responsavel) }
 
-        log.info { "salvando responsavel aluno {}  $responsavel" }
-        alunoRepository.save(aluno)
+        responsavel.alunos = alunos.toMutableList()
+
+        responsavelRepository.save(responsavel)
+
+        log.info("atualizado alunos ")
 
         return responsavel.toModelResponse()
 
@@ -59,9 +59,10 @@ class ResponsavelService(
         val motorista = notFoundService.findByCodigoMotorista(codigoDTO.codigo)
 
         responsavel.motorista = motorista
+
         responsavelRepository.save(responsavel)
 
-        log.info { "salvo confirmação, informações disponiveis para motorista {}  $responsavel" }
+        log.info { "salvo confirmação, informações disponiveis para motorista {}  ${responsavel.toString()}" }
         return responsavel.toModelResponse()
     }
 

@@ -96,7 +96,10 @@ class MotoristaService(
         alunoRepository.saveAll(alunos)
 
 
-        return EmbarqueDTO(alunos.map { aluno -> aluno.toDto() })
+
+
+
+        return EmbarqueDTO(alunos.map { it.toDto() })
 
     }
 

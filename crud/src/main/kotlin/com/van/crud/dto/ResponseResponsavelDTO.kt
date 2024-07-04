@@ -11,9 +11,9 @@ data class ResponseResponsavelDTO(
     var telefone: String,
     var cpf: String,
     var dataNascimento: LocalDate,
-    var aluno: List<AlunoDTO?> = mutableListOf(),
+    var alunos: List<AlunoDTO?> = mutableListOf(),
     var endereco: Endereco,
-    var motorista: MotoristaDTO
+    var motorista: MotoristaDTO?
 ) {
 
     fun toModel(): ResponseResponsavelDTO {
@@ -25,8 +25,8 @@ data class ResponseResponsavelDTO(
             cpf = this.cpf,
             dataNascimento = this.dataNascimento,
             endereco = this.endereco,
-            motorista = this.motorista,
-            aluno = this.aluno
+            motorista = null,
+            alunos = this.alunos
         )
     }
 

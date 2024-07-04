@@ -31,10 +31,10 @@ class ResponsavelController(
     }
 
     @PostMapping("/alunos/{id}")
-    fun cadastroAluno(@Valid @RequestBody alunoDto: AlunoDTO, @NotNull @PathVariable id: Long):
+    fun cadastroAluno(@Valid @RequestBody alunosDto: List<AlunoDTO>, @NotNull @PathVariable id: Long):
             ResponseEntity<ResponseResponsavelDTO> {
 
-        val cadastrarAluno = service.cadastrarAluno(alunoDto, id)
+        val cadastrarAluno = service.cadastrarAluno(alunosDto, id)
 
         return ResponseEntity(cadastrarAluno, HttpStatus.CREATED)
 

@@ -1,8 +1,6 @@
 package com.van.crud.dto
 
-import com.van.crud.model.Aluno
 import com.van.crud.model.Endereco
-import com.van.crud.model.Motorista
 import com.van.crud.model.Responsavel
 import jakarta.validation.Valid
 import jakarta.validation.constraints.NotBlank
@@ -17,7 +15,6 @@ data class RequestResponsavelDTO(
     var telefone: String,
     var cpf: String,
     var dataNascimento: LocalDate,
-    var motorista: RequestMotoristaDTO?,
     var aluno: List<AlunoDTO?> = mutableListOf(),
     @Valid
     var endereco: Endereco,
@@ -32,7 +29,7 @@ data class RequestResponsavelDTO(
             cpf = this.cpf,
             dataNascimento = this.dataNascimento,
             endereco = this.endereco,
-            motorista = motorista?.toEntity()
+            motorista = null
         )
 
     }

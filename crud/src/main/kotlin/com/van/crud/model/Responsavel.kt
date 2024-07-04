@@ -1,6 +1,5 @@
 package com.van.crud.model
 
-import com.van.crud.dto.MotoristaDTO
 import com.van.crud.dto.ResponseResponsavelDTO
 import jakarta.persistence.*
 import java.time.LocalDate
@@ -17,7 +16,7 @@ data class Responsavel(
     var cpf: String,
     var dataNascimento: LocalDate,
     @OneToMany(mappedBy = "responsavel", cascade = [CascadeType.ALL])
-    var aluno: MutableList<Aluno?> = mutableListOf(),
+    var alunos: List<Aluno?> = mutableListOf(),
 
     @Embedded
     var endereco: Endereco,
@@ -38,13 +37,8 @@ data class Responsavel(
             cpf = this.cpf,
             dataNascimento = this.dataNascimento,
             endereco = this.endereco,
-            motorista = MotoristaDTO(
-                motorista?.id,
-                motorista?.nome ?: "",
-                motorista?.telefone ?: "",
-                motorista?.endereco ?: Endereco("", "", "", "", "", "", "")
-            ),
-            aluno = aluno.map { it?.toDto() }
+            motorista = motorista?.toDTOSingle(),
+            alunos = alunos.map { it?.toDto() }
         )
     }
 
