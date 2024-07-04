@@ -3,6 +3,7 @@ package com.van.crud.controller
 import com.van.crud.dto.*
 import com.van.crud.service.MotoristaService
 import jakarta.validation.Valid
+import jakarta.validation.constraints.NotNull
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
 import org.springframework.http.HttpStatus
