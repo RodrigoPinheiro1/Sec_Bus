@@ -40,7 +40,7 @@ class MotoristaService(
         log.info("buscando enderecos motorista")
 
 
-        return motoristaRepository.findAllByEnderecoCidade(pagable, cidade).map {
+        return motoristaRepository.findAllByEnderecoBairro(pagable, cidade).map {
             it.toDTOSingle()
         }
 

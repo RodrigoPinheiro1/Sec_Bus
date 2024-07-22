@@ -21,10 +21,11 @@ class ResponsavelController(
 
 
     @PostMapping
-    fun cadastroResponsavel(@Valid @RequestBody requestResponsavelDTO: RequestResponsavelDTO):
+    suspend fun cadastroResponsavel(@Valid @RequestBody requestResponsavelDTO: RequestResponsavelDTO):
             ResponseEntity<ResponseResponsavelDTO> {
 
         val cadastrarResponsavel = service.cadastrarResponsavel(requestResponsavelDTO)
+
 
 
         return ResponseEntity(cadastrarResponsavel, HttpStatus.CREATED)
@@ -41,7 +42,11 @@ class ResponsavelController(
     }
 
     @PutMapping("/pedidos/{id}")
-    fun confirmarCorrida(@PathVariable @NotNull id: Long, @RequestBody codigoDTO: CodigoDTO): ResponseEntity<ResponseResponsavelDTO> {
+    fun confirmarCorrida(
+        @PathVariable @NotNull id: Long,
+        @RequestBody codigoDTO: CodigoDTO
+    ):
+            ResponseEntity<ResponseResponsavelDTO> {
 
         val responseDto = responsavelService.confirmarCorrida(id, codigoDTO)
 
