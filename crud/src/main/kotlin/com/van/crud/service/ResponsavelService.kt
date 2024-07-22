@@ -4,7 +4,6 @@ import com.van.crud.dto.AlunoDTO
 import com.van.crud.dto.CodigoDTO
 import com.van.crud.dto.RequestResponsavelDTO
 import com.van.crud.dto.ResponseResponsavelDTO
-import com.van.crud.repository.AlunoRepository
 import com.van.crud.repository.ResponsavelRepository
 import mu.KotlinLogging
 import org.springframework.stereotype.Service
@@ -58,13 +57,12 @@ class ResponsavelService(
 
         val responsavel = notFoundService.findByIdResponsavel(id)
 
-        val motorista = notFoundService.findByCodigoMotorista(codigoDTO.codigo)
+        val motorista = notFoundService.findByCodigoMotorista(codigoDTO.codigo!!)
 
         responsavel.motorista = motorista
 
         responsavelRepository.save(responsavel)
 
-        //  log.info { "salvo confirmação, informações disponiveis para motorista {}  ${responsavel.toString()}" }
         return responsavel.toModelResponse()
     }
 

@@ -1,5 +1,11 @@
 package com.van.crud.dto
 
+import jakarta.validation.constraints.NotBlank
+import jakarta.validation.constraints.NotNull
+
 data class CodigoDTO (
-    var codigo: String,
+
+    @field:NotBlank
+    @field:NotNull
+    var codigo: String?,
 )
