@@ -8,6 +8,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException
 import org.springframework.web.bind.annotation.ExceptionHandler
 import org.springframework.web.bind.annotation.ResponseStatus
 import org.springframework.web.bind.annotation.RestControllerAdvice
+import org.springframework.web.reactive.function.client.WebClientResponseException
 import org.springframework.web.servlet.resource.NoResourceFoundException
 import java.time.LocalDateTime
 import java.time.LocalDateTime.now
@@ -50,6 +51,20 @@ class GlobalMessageException {
         )
 
     }
+
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    @ExceptionHandler(CepException::class)
+    fun cepInexistente(): MessageError {
+
+        return MessageError(
+            timestamp = now(),
+            status = HttpStatus.BAD_REQUEST.value(),
+            error = "Cep não existe",
+            errors = listOf()
+        )
+
+    }
+
 
     @ResponseStatus(HttpStatus.NOT_FOUND)
     @ExceptionHandler(NoResourceFoundException::class)
